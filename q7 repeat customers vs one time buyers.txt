@@ -1,0 +1,19 @@
+-- How many customers are repeat vs one-time buyers?
+
+# WITH customer_orders AS (
+#     SELECT
+#         o.customer_id,
+#         COUNT(o.order_id) AS num_orders
+#     FROM orders o
+#     GROUP BY o.customer_id
+# )
+# SELECT
+#     CASE
+#         WHEN num_orders = 1 THEN 'One-time Buyer'
+#         ELSE 'Repeat Buyer'
+#     END AS customer_type,
+#     COUNT(*) AS total_customers
+# FROM customer_orders
+# GROUP BY customer_type;
+
+This query produces a customer retention metric, because it tells how many customers bought once and other multiple times.

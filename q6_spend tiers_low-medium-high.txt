@@ -1,0 +1,38 @@
+-- Segment customers into spend tiers (Low/medium/high)
+
+# WITH customer_spend AS (
+#     SELECT
+#         c.customer_id,
+#         SUM(p.payment_value) AS total_spent
+#     FROM customers c
+#     JOIN orders o
+#         ON c.customer_id = o.customer_id
+#     JOIN order_payments p
+#         ON o.order_id = p.order_id
+#     GROUP BY c.customer_id
+# )
+# SELECT
+#     customer_id,
+#     total_spent,
+#     CASE
+#         WHEN total_spent < 500 THEN 'Low'
+#         WHEN total_spent BETWEEN 500 AND 2000 THEN 'Medium'
+#         ELSE 'High'
+#     END AS spend_tier
+# FROM customer_spend
+# ORDER BY total_spent DESC;
+
+
+This query gives information on the ff:
+
+who your high‑value customers are
+
+who your mid‑value customers are
+
+who your low‑value customers are
+
+This can be used for marketing segmentation, retention strategies, and loyalty programs.
+
+
+
+

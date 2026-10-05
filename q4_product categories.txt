@@ -1,0 +1,17 @@
+-- Which product categories generate the most revenue?
+
+# SELECT
+#     p.product_category_name AS category,
+#     ROUND(SUM(op.payment_value),2) AS total_revenue
+# FROM order_items oi
+# JOIN products p
+#     ON oi.product_id = p.product_id
+# JOIN order_payments op
+#     ON oi.order_id = op.order_id
+# GROUP BY p.product_category_name
+# ORDER BY total_revenue DESC;
+
+This query produces a rank list of all product categories showing, category name, total revenue generated, sorted from highest to lowest. The query also tells which products drive the business financially.
+
+
+

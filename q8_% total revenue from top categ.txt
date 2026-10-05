@@ -1,0 +1,27 @@
+-- What % of total revenue comes from the top category
+
+WITH category_revenue AS (
+#     SELECT
+#         p.product_category_name AS category,
+#         ROUND(SUM(op.payment_value), 2) AS total_revenue
+#     FROM order_items oi
+#     JOIN products p
+#         ON oi.product_id = p.product_id
+#     JOIN order_payments op
+#         ON oi.order_id = op.order_id
+#     GROUP BY p.product_category_name
+# ),
+# total_revenue AS (
+#     SELECT SUM(total_revenue) AS grand_total
+#     FROM category_revenue
+# )
+# SELECT
+#     cr.category,
+#     cr.total_revenue,
+#     ROUND((cr.total_revenue / tr.grand_total) * 100, 2) AS revenue_percentage
+# FROM category_revenue cr
+# CROSS JOIN total_revenue tr
+# ORDER BY revenue_percentage DESC
+# LIMIT 1;
+
+This query tells how dominant the top category is. This is where the resources and operation is concentrated.

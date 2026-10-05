@@ -1,0 +1,16 @@
+-- What is the month-over-month change in revenue?
+
+# WITH monthly_rev
+#          AS (SELECT DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m') AS month, ROUND(SUM(p.payment_value), 2) AS monthly_revenue
+# FROM orders o
+#     JOIN order_payments p
+# ON o.order_id = p.order_id
+# GROUP BY DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m')
+#     )
+# SELECT
+#     month, monthly_revenue, monthly_revenue - LAG (monthly_revenue, 1) OVER (ORDER BY month) AS mom_change
+# FROM monthly_rev
+# ORDER BY month desc;
+
+
+This query produces a month‑by‑month revenue timeline plus the change from the previous month, allowing you to see growth spikes, slowdowns, and seasonal patterns.

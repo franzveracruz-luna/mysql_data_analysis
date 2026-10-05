@@ -1,0 +1,40 @@
+-- Rank top 3 products within each category by revenue
+
+# WITH product_revenue AS (
+#     SELECT
+#         p.product_category_name AS category,
+#         oi.product_id,
+#         ROUND(SUM(op.payment_value),2) AS total_revenue
+#     FROM order_items oi
+#     JOIN products p
+#         ON oi.product_id = p.product_id
+#     JOIN order_payments op
+#         ON oi.order_id = op.order_id
+#     GROUP BY p.product_category_name, oi.product_id
+# ),
+# ranked_products AS (
+#     SELECT
+#         category,
+#         product_id,
+#         total_revenue,
+#         ROW_NUMBER() OVER (
+#             PARTITION BY category
+#             ORDER BY total_revenue DESC
+#         ) AS rank_in_category
+#     FROM product_revenue
+# )
+# SELECT
+#     category,
+#     product_id,
+#     total_revenue
+# FROM ranked_products
+# WHERE rank_in_category <= 3
+# ORDER BY category, total_revenue DESC;
+
+
+This query produces a list showing, for every product category: the top 3 highest‑revenue products, their product_id, their total revenue and sorted by category and revenue
+
+
+
+
+
